@@ -1,0 +1,67 @@
+body {
+  font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif
+}
+
+.radial-wrapper {
+  width: 650px;
+  height: 650px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.radial-container {
+  width: 650px;
+  height: 650px;
+  border-radius: 100%
+}
+
+.radial-container div {
+  position: absolute;
+  margin-left: -110px;
+  margin-top: -60px;
+  height: 120px;
+  width: 230px;
+  clip-path: polygon(0 0, 100% 0, 75% 100%, 25% 100%);
+  background-color: #1b1b1b96;
+  border-top: 2px solid rgba(255, 255, 255, 0.505);
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.radial-container div:hover {
+  border-top: 2px solid rgba(59, 169, 228, 0);
+  background-color: #1b1b1bcc;
+  background: linear-gradient(to bottom, rgba(21, 120, 174, 0.721) , rgba(59, 169, 228, 0.189));
+}
+
+.radial-container div img {
+  width: 70px
+}
+
+.item-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  background-color: #1b1b1bcc;
+  color: #ffffffbd;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)
+}
+
+.item-info img {
+  width: 60px
+}
+
+img {
+  filter: grayscale()
+}
