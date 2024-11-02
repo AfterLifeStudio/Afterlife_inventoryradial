@@ -6,3 +6,7 @@ GIVE ME STARSSSSSSSSSSSS
 
 **Preview**
 [Youtube](https://youtu.be/bLLPNrD8NkA)
+
+
+# Copyright
+Copyright © 2024 AfterLifeStudio https://github.com/AfterLifeStudio
