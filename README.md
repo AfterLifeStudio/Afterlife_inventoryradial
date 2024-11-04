@@ -8,6 +8,7 @@ GIVE ME STARSSSSSSSSSSSS
 ![20241101174150_1](https://github.com/user-attachments/assets/4ecdd14a-012a-450c-b9c0-db31ef24a366)
 [Youtube](https://youtu.be/bLLPNrD8NkA)
 
+**Need Support** [Discord](https://discord.gg/fG8gtywEZ5)
 
 # Copyright
 Copyright © 2024 AfterLifeStudio https://github.com/AfterLifeStudio
