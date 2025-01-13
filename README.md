@@ -5,10 +5,10 @@ This script is basically a circular style hotbar for ox inventory you can use it
 GIVE ME STARSSSSSSSSSSSS
 
 **Preview**
-![20241101174150_1](https://github.com/user-attachments/assets/4ecdd14a-012a-450c-b9c0-db31ef24a366)
 [Youtube](https://youtu.be/bLLPNrD8NkA)
 
-**Need Support** [Discord](https://discord.gg/fG8gtywEZ5)
+[![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/HWejPwZgvQ)
+[![Website](https://img.shields.io/badge/Tebex-%23e62e56.svg?style=for-the-badge&logo=Tebex&logoColor=white)](https://al-studios.tebex.io/)
 
 # Copyright
 Copyright © 2024 AfterLifeStudio https://github.com/AfterLifeStudio
