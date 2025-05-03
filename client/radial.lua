@@ -1,42 +1,38 @@
-local nuiMessage = function(action, data)
-    SendNUIMessage({
-        action = action,
-        data = data,
-    })
-end
+local Inventory = require "client.invBridge":new()
 
 local state = false
 
-local openradial = function()
+local function nuiMessage(action, data)
+    SendNUIMessage({ action = action, data = data })
+end
+local function openradial()
     if state then return end
     state = true
 
     TriggerScreenblurFadeIn(200.0)
 
-    local items = exports.ox_inventory:GetPlayerItems()
-
+    local items = Inventory:getItems()
     local options = {}
 
-
-
     for i = 1, 8 do
-        options[#options + 1] = {
-            slot = #options + 1,
-        }
+        options[i] = { slot = i }
     end
 
-    for k,data in pairs(items) do
-        if data then
-            if data.slot < 9 then
-                options[data.slot] = {
-                    slot = data.slot,
-                    count = data.count,
-                    name = data.label,
-                    imageurl = 'nui://ox_inventory/web/images/' .. data.name .. '.png'
-                }
-            end
+    for _, item in ipairs(items) do
+        local slot = item.slot or item.slotId
+        if slot and slot < 9 then
+            options[slot] = {
+                slot = slot,
+                count = item.count or item.quantity,
+                name = item.label or item.itemLabel,
+                imageurl = Inventory:getImage(item)
+            }
         end
     end
+
+    table.sort(options, function(a, b)
+        return a.slot < b.slot
+    end)
 
     PlaySoundFrontend(-1, "TOGGLE_ON", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
     SetNuiFocus(true, true)
@@ -62,7 +58,7 @@ local openradial = function()
     end)
 end
 
-local closeradial = function()
+local function closeradial()
     if not state then return end
     state = false
     PlaySoundFrontend(-1, "TOGGLE_ON", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
@@ -74,23 +70,20 @@ local closeradial = function()
     })
 end
 
-
-
 RegisterNUICallback('useitem', function(data, cb)
     PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
     TriggerScreenblurFadeOut(0)
     SetNuiFocus(false, false)
     state = false
-    exports.ox_inventory:useSlot(data)
-    cb({})
+
+    Inventory:useItem(data)
+    cb({ success = true })
 end)
-
-
 
 lib.addKeybind({
     name = 'inventoryradial',
-    description = 'press F1 to toggle radial',
-    defaultKey = 'f2',
+    description = 'Press F3 to toggle radial',
+    defaultKey = 'f3',
     onPressed = openradial,
     onReleased = closeradial
 })

@@ -26,7 +26,10 @@ const Radial = () => {
           <div className="radial-container">
             {options.map((data) => (
               <div
-                onMouseEnter={() => {setHoverItem(data.slot - 1)}}
+              onMouseEnter={() => {
+                setHoverItem(data.slot - 1);
+              }}
+              
                 onClick={() => {
                   nuicallback("useitem", data.slot)
                   setVisible(false)
