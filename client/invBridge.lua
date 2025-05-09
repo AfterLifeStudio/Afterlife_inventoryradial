@@ -36,7 +36,6 @@ function InventoryBridge:useItem(slot)
     if self.type == "OX" then
         self.inv:useSlot(slot)
     elseif self.type == "LGF" then
-
         self.inv:useItem(slot)
     elseif self.type == "custom" then
     end
@@ -47,6 +46,16 @@ function InventoryBridge:getImage(item)
         return ('nui://ox_inventory/web/images/%s.png'):format(item.name)
     elseif self.type == "LGF" then
         return ('nui://LGF_Inventory/web/images/%s.png'):format(item.itemName)
+    elseif self.type == "custom" then
+        return ""
+    end
+end
+
+function InventoryBridge:isInvOpened()
+    if self.type == "OX" then
+        return LocalPlayer.state.invOpen
+    elseif self.type == "LGF" then
+        return exports.LGF_Inventory:isInventoryOpen()
     elseif self.type == "custom" then
         return ""
     end
