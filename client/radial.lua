@@ -1,13 +1,17 @@
 local Inventory = require "client.invBridge":new()
 
-local state = false
+LocalPlayer.state.radialBusy = false
 
 local function nuiMessage(action, data)
     SendNUIMessage({ action = action, data = data })
 end
+
 local function openradial()
-    if state then return end
-    state = true
+    if LocalPlayer.state.radialBusy then return end
+    local isInvOpened = Inventory:isInvOpened()
+    if isInvOpened then return end
+
+    LocalPlayer.state.radialBusy = true
 
     TriggerScreenblurFadeIn(200.0)
 
@@ -46,7 +50,7 @@ local function openradial()
     SetCursorLocation(0.5, 0.5)
 
     CreateThread(function()
-        while state do
+        while LocalPlayer.state.radialBusy do
             DisablePlayerFiring(cache.playerId, true)
             DisableControlAction(0, 1, true)
             DisableControlAction(0, 2, true)
@@ -59,8 +63,8 @@ local function openradial()
 end
 
 local function closeradial()
-    if not state then return end
-    state = false
+    if not LocalPlayer.state.radialBusy then return end
+    LocalPlayer.state.radialBusy = false
     PlaySoundFrontend(-1, "TOGGLE_ON", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
     TriggerScreenblurFadeOut(200.0)
     SetNuiFocus(false, false)
@@ -74,7 +78,7 @@ RegisterNUICallback('useitem', function(data, cb)
     PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0)
     TriggerScreenblurFadeOut(0)
     SetNuiFocus(false, false)
-    state = false
+    LocalPlayer.state.radialBusy = true
 
     Inventory:useItem(data)
     cb({ success = true })
@@ -87,3 +91,6 @@ lib.addKeybind({
     onPressed = openradial,
     onReleased = closeradial
 })
+
+
+exports("toggleRadial", openradial)
